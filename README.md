@@ -1,3 +1,4 @@
+Blink is built to fit [UIkit](http://getuikit.com), but also can be enhanced to be standalone from any frontend framework.
 
 # To do
 Today it will be updated. 
