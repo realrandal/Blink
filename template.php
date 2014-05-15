@@ -109,9 +109,11 @@ class KunenaTemplateBlink extends KunenaTemplate
 		$this->addScript('js/timeago.js');  
 
 		$this->addStyleSheet ( 'css/wbbtheme.css' );
-		$this->addScript ( 'js/jquery.wysibb.js' ); // <<<<<<<<< NEW POWER IS HERE!
+		$this->addScript ( 'js/jquery.wysibb.min.js' ); // <<<<<<<<< NEW POWER IS HERE!
+		$this->addScript ( 'js/pl.js' );  
 
 		$this->addScript('js/custom.js');  
+		$this->addScript('js/atwho.js');  
 
 		// New Kunena JS for default template 
 		$this->addScript ( 'js/plugins.js' );  
@@ -187,6 +189,11 @@ HTML;
 	}
 
 	public function getIcon($name, $title='')
+	{ 
+		return ' <i class="uk-icon-'.$name.' uk-tip" title="'.$title.'"></i> '; 
+	}
+	
+	public function profileIcon($name, $title='')
 	{ 
 		return ' <i class="uk-icon-'.$name.' uk-tip" title="'.$title.'"></i> '; 
 	}

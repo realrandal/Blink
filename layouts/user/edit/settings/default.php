@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -14,17 +14,13 @@ defined('_JEXEC') or die;
 	<?php echo $this->headerText; ?>
 </h3>
 
-<table class="table table-bordered table-striped table-hover">
-	<tbody>
+<ul class="uk-list">
 		<?php foreach ($this->settings as $field) : ?>
-			<tr>
-				<td class="span3">
+			<li>
+				<label>
 					<?php echo $field->label; ?>
-				</td>
-				<td>
-					<?php echo $field->field; ?>
-				</td>
-			</tr>
+				</label>
+				<?php echo $field->field; ?>
+			</li>
 		<?php endforeach ?>
-	</tbody>
-</table>
+</ul>

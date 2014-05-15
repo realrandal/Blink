@@ -21,7 +21,7 @@ foreach ($this->sections as $section) :
 
 	<?php if (count($this->sections) > 0) : ?>
 
-	<a id="toggler<?php echo $section->id; ?>" class="section-toggler uk-float-right">
+	<a id="toggler<?php echo $section->id; ?>" title="Ukryj/Pokaż sekcję" class="section-toggler uk-float-right uk-tip">
 	    <i class="uk-icon-chevron-down uk-icon-small closed"></i>
 	    <i class="uk-icon-chevron-left uk-icon-small open"></i>
 	</a>

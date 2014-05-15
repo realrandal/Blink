@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.

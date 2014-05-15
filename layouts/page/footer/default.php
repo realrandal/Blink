@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 <?php endif; ?>
 
 <?php if (($time = $this->getTime()) !== null) : ?>
-<p>
+<p class="uk-hidden foot-time">
 <small>
 	<?php echo JText::sprintf('COM_KUNENA_VIEW_COMMON_FOOTER_TIME', $time); ?>
 </small>

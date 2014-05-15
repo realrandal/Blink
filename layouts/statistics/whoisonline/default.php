@@ -17,35 +17,34 @@ defined('_JEXEC') or die;
 		<?php echo JText::_('COM_KUNENA_VIEW_COMMON_WHO_TITLE'); ?>
 	</h3>
 
-	<p>
-		<?php echo JText::sprintf('COM_KUNENA_VIEW_COMMON_WHO_TOTAL', $this->membersOnline); ?>
-	</p>
+	<div class="online-info"><?php// echo JText::sprintf('COM_KUNENA_VIEW_COMMON_WHO_TOTAL', $this->membersOnline); ?>  
+
+	<?php // echo count($this->hiddenList)?></div> 
 
 	<?php if (!empty($this->onlineList)) : ?>
-	<ul class="uk-list users-online">
-
+	<ul class="uk-list uk-margin-remove users-online">
 	<?php foreach ($this->onlineList as $user) : ?>
 		<li><?php echo $user->getAvatarImage('user-online-avatar', 67, 67); ?><br>
 		<?php echo $user->getLink(); ?></li>
 	<?php endforeach; ?>
-
 	</ul>
 	<?php endif; ?>
 
 	<?php if (!empty($this->hiddenList)) : ?>
-	<ul class="uk-list uk-list-line users-online">
-		<li><?php echo JText::_('COM_KUNENA_HIDDEN_USERS'); ?>:</li>
 
+	<?php  // echo JText::_('COM_KUNENA_HIDDEN_USERS'); ?>
+
+	<ul class="uk-list users-online uk-margin-remove hidden-users">
 	<?php foreach ($this->hiddenList as $user) : ?>
-		<li><?php echo $user->getLink(); ?></li>
+		<li class="uk-tip" title="Użytkownik ukryty"><?php echo $user->getAvatarImage('user-online-avatar', 67, 67); ?><br>
+		<?php echo $user->getLink(); ?></li>
 	<?php endforeach; ?>
-
 	</ul>
 	<?php endif; ?>
 		
 <button class="uk-button" data-uk-toggle="{target:'#users-legend'}"><?php echo JText::_('COM_KUNENA_LEGEND'); ?></button>
  
-	<div id="users-legend" class="uk-hidden">
+	<div id="users-legend" class="uk-hidden uk-clearfix">
 		<span class="kwho-admin">
 			<?php echo JText::_('COM_KUNENA_COLOR_ADMINISTRATOR'); ?>,
 		</span>

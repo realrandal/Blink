@@ -31,28 +31,30 @@ defined('_JEXEC') or die;
 	<div class="stats-content">
 		<ul class="uk-list">
 			<li>
-				<?php echo JText::_('COM_KUNENA_STAT_TOTAL_MESSAGES'); ?>:
+				<i class="uk-icon-pencil"></i> <?php echo JText::_('COM_KUNENA_STAT_TOTAL_MESSAGES'); ?>:
 				<strong><?php echo (int) $this->messageCount; ?></strong>
 				<span class="divider">|</span>
-				<?php echo JText::_('COM_KUNENA_STAT_TOTAL_SUBJECTS'); ?>:
+				<i class="uk-icon-copy"></i> <?php echo JText::_('COM_KUNENA_STAT_TOTAL_SUBJECTS'); ?>:
 				<strong><?php echo (int) $this->topicCount; ?></strong>
 			</li>
 			<li>
-				<?php echo JText::_('COM_KUNENA_STAT_TOTAL_SECTIONS'); ?>:
+				<i class="uk-icon-folder-open-o"></i> <?php echo JText::_('COM_KUNENA_STAT_TOTAL_SECTIONS'); ?>:
 				<strong><?php echo (int) $this->sectionCount; ?></strong>
 				<span class="divider">|</span>
-				<?php echo JText::_('COM_KUNENA_STAT_TOTAL_CATEGORIES'); ?>:
+				<i class="uk-icon-folder-o"></i> <?php echo JText::_('COM_KUNENA_STAT_TOTAL_CATEGORIES'); ?>:
 				<strong><?php echo (int) $this->categoryCount; ?></strong>
 			</li>
+		</ul>	
+		<ul class="uk-list">
 			<li>
-				<?php echo JText::_('COM_KUNENA_STAT_TODAY_OPEN_THREAD'); ?>:
+				<i class="uk-icon-file-text-o"></i> <?php echo JText::_('COM_KUNENA_STAT_TODAY_OPEN_THREAD'); ?>:
 				<strong><?php echo (int) $this->todayTopicCount; ?></strong>
 				<span class="divider">|</span>
 				<?php echo JText::_('COM_KUNENA_STAT_YESTERDAY_OPEN_THREAD'); ?>:
 				<strong><?php echo (int) $this->yesterdayTopicCount; ?></strong>
 			</li>
 			<li>
-				<?php echo JText::_('COM_KUNENA_STAT_TODAY_TOTAL_ANSWER'); ?>:
+				<i class="uk-icon-reply-all"></i> <?php echo JText::_('COM_KUNENA_STAT_TODAY_TOTAL_ANSWER'); ?>:
 				<strong><?php echo (int) $this->todayReplyCount; ?></strong>
 				<span class="divider">|</span>
 				<?php echo JText::_('COM_KUNENA_STAT_YESTERDAY_TOTAL_ANSWER'); ?>:
@@ -61,40 +63,36 @@ defined('_JEXEC') or die;
 		</ul>
 		<ul class="uk-list">
 			<li>
-				<?php echo JText::_('COM_KUNENA_STAT_TOTAL_USERS'); ?>:
+				<i class="uk-icon-users"></i> <?php echo JText::_('COM_KUNENA_STAT_TOTAL_USERS'); ?>:
 
 				<?php if ($this->userlistUrl) : ?>
 				<strong><a href="<?php echo $this->userlistUrl; ?>"><?php echo $this->memberCount; ?></a></strong>
 				<?php else : ?>
 				<strong><?php echo $this->memberCount; ?></strong>
-				<?php endif; ?>
-
-				<span class="divider">|</span>
-				<?php echo JText::_('COM_KUNENA_STAT_LATEST_MEMBERS'); ?>:
-
+				<?php endif; ?>			
+			</li>
+			<li>
+				<i class="uk-icon-user"></i> <?php echo JText::_('COM_KUNENA_STAT_LATEST_MEMBERS'); ?>:
 				<strong><?php echo $this->latestMemberLink; ?></strong>
 			</li>
-			<li>
-				&nbsp;
-			</li>
-
+	</ul>
 			<?php if ($this->userlistUrl) : ?>
-			<li>
-				<a href="<?php echo $this->userlistUrl; ?>">
+		 
+				<a class="uk-button" href="<?php echo $this->userlistUrl; ?>">
 					<?php echo JText::_('COM_KUNENA_STAT_USERLIST').' &raquo;'; ?>
 				</a>
-			</li>
+		 
 			<?php endif; ?>
 
 			<?php if ($this->statisticsUrl) : ?>
-			<li>
-				<a href="<?php echo $this->statisticsUrl; ?>">
+		 
+				<a class="uk-button" href="<?php echo $this->statisticsUrl; ?>">
 					<?php echo JText::_('COM_KUNENA_STAT_MORE_ABOUT_STATS').' &raquo;'; ?>
 				</a>
-			</li>
+ 
 			<?php endif; ?>
 
-		</ul>
+	
 	</div>
  
  

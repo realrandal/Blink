@@ -31,6 +31,19 @@ if ($show)
 				<a href="#hide-profile" title="Rozwiń profil" class="user-toggle user-toggle-full"><?php echo $user->getAvatarImage('author-avatar-full', 160, 160); ?></a>
 			<?php endif; ?>
 
+
+	<div class="uk-float-left">
+				<?php echo $user->profileIcon('gender'); ?>
+				<?php echo $user->profileIcon('birthdate'); ?>
+				<?php echo $user->profileIcon('location'); ?>
+				<?php echo $user->profileIcon('website'); ?>
+				<?php echo $user->profileIcon('private'); ?>
+				<?php echo $user->profileIcon('email'); ?>
+
+				<?php echo $user->getLink(); ?>
+				
+			</div>
+
 			<ul class="uk-list user-info-list uk-clearfix">
 
 				<li>
@@ -84,14 +97,10 @@ if ($show)
 
 			</ul>
 
-			<div class="uk-float-left">
-				<?php echo $user->profileIcon('gender'); ?>
-				<?php echo $user->profileIcon('birthdate'); ?>
-				<?php echo $user->profileIcon('location'); ?>
-				<?php echo $user->profileIcon('website'); ?>
-				<?php echo $user->profileIcon('private'); ?>
-				<?php echo $user->profileIcon('email'); ?>
-			</div>
+		
+
+
+
 
 		</div>		
 	</div>		
@@ -108,7 +117,7 @@ if ($show)
 
 			<author class="author-name"><?php echo $user->username ?></author>
 
-			<span class="uk-badge <?php echo $user->isOnline('uk-badge-success', 'uk-hidden') ?> online-status">
+			<span class="<?php echo $user->isOnline('is-online', 'uk-hidden') ?> online-status">
 				<?php echo $user->isOnline(JText::_('COM_KUNENA_ONLINE'), JText::_('COM_KUNENA_OFFLINE')); ?>
 			</span>
 		</a>	

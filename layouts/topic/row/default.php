@@ -68,7 +68,7 @@ if (!empty($this->spacing)) : ?>
 							endif; ?>
 		
 							<?php if ($topic->unread) {
-								echo $this->getTopicLink($topic, 'unread', '' . (int) $topic->unread . '', null, 'uk-button uk-button-success uk-button-mini uk-tip-slow');
+								echo $this->getTopicLink($topic, 'unread', '' . (int) $topic->unread . '', null, 'uk-button uk-text-success uk-button-mini uk-tip-slow');
 							}
 		
 							?>

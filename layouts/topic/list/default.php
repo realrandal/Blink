@@ -48,7 +48,7 @@ $this->pagination->setDisplayedPages(3);
 			<div class="uk-navbar category-title-bar">
 				<h2 class="category-title">
 					<?php echo $this->escape($this->headerText); ?>
-					<span class="uk-badge"><?php echo $this->pagination->total; ?></span>	
+					<span class="uk-badge">Tematów: <?php echo $this->pagination->total; ?></span> 
 				</h2>					
 			</div>
 
