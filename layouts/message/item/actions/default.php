@@ -44,7 +44,7 @@ $message = $this->message;
 		</div>
 
 		<div class="uk-float-right">
-		<a data-uk-smooth-scroll href="#qr-<?php echo $message->displayField('id') ?>" class="uk-button add-quick-reply" title="<?php echo JText::_('COM_KUNENA_MESSAGE_ACTIONS_LABEL_QUICK_REPLY_DESC'); ?>"><?php echo JText::_('COM_KUNENA_MESSAGE_ACTIONS_LABEL_QUICK_REPLY'); ?></a>
+		<a data-uk-smooth-scrollx xhref="#qr-<?php echo $message->displayField('id') ?>" class="uk-button add-quick-reply" title="<?php echo JText::_('COM_KUNENA_MESSAGE_ACTIONS_LABEL_QUICK_REPLY_DESC'); ?>"><?php echo JText::_('COM_KUNENA_MESSAGE_ACTIONS_LABEL_QUICK_REPLY'); ?></a>
 		<?php echo $this->messageButtons->get('thankyou'); ?>
 		</div>
 

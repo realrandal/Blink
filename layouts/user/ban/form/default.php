@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -147,7 +147,7 @@ defined('_JEXEC') or die;
 			</tr>
 			<tr>
 				<td class="center" colspan="2">
-					<input class="uk-button btn-primary" type="submit" value="<?php echo $this->banInfo->id
+					<input class="btn btn-primary" type="submit" value="<?php echo $this->banInfo->id
 						? JText::_('COM_KUNENA_BAN_EDIT')
 						: JText::_('COM_KUNENA_BAN_NEW'); ?>" name="Submit" />
 				</td>

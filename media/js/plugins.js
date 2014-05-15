@@ -1,8 +1,8 @@
 /**
  * Kunena Component
- * @package Kunena.Template.Blink
+ * @package Kunena.Template.Crypsis
  *
- * @copyright (C) 2008 - 2014 Kunena Team. All rights reserved.
+ * @copyright (C) 2008 - 2013 Kunena Team. All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  * @link http://www.kunena.org
  **/
@@ -36,17 +36,32 @@ function kPreviewHelper() {
 }
 
 jQuery(document).ready(function() {
+	/* To hide or open collapse localStorage */
+	jQuery('.collapse').on('hidden', function() {
+				if (this.id) {
+						localStorage[this.id] = 'true';
+				}
+		}).on('shown', function() {
+				if (this.id) {
+						localStorage.removeItem(this.id);
+				}
+		}).each(function() {
+				if (this.id && localStorage[this.id] === 'true' ) {
+						jQuery(this).collapse('hide');
+				}
+	});
+	
 	/* To hide or open spoiler on click */
-	jQuery('.kspoiler').each(function( ) {	
-		jQuery('.kspoiler-header').click(function() {
-			if ( jQuery('.kspoiler-content').attr('style')=='display:none' ) {
-				jQuery('.kspoiler-content').removeAttr('style');
-				jQuery('.kspoiler-expand').attr('style','display:none;');
-				jQuery('.kspoiler-hide').removeAttr('style');
+	jQuery('.kspoiler').each(function() {
+		jQuery('.kspoiler').click(function() {
+			if ( !jQuery('.kspoiler-content').is(':visible') ) {
+				jQuery(this).find('.kspoiler-content').show();
+				jQuery(this).find('.kspoiler-expand').hide();
+				jQuery(this).find('.kspoiler-hide').show();
 			} else {
-				jQuery('.kspoiler-content').attr('style','display:none;');
-				jQuery('.kspoiler-expand').removeAttr('style');
-				jQuery('.kspoiler-hide').attr('style','display:none;');
+				jQuery(this).find('.kspoiler-content').hide();
+				jQuery(this).find('.kspoiler-expand').show();
+				jQuery(this).find('.kspoiler-hide').hide();
 			}
 		});
 	});
@@ -138,6 +153,77 @@ jQuery(document).ready(function() {
 			}
 		});
 	}
+
+	/* On moderate page display subject or field to enter manually the topic ID */
+	jQuery('#kmod_topics').change(function() {
+		var id_item_selected = jQuery(this).val();
+				
+		if (id_item_selected != 0) {
+			jQuery('#kmod_subject').hide();
+		} else {
+			jQuery('#kmod_subject').show();
+		}
+		
+		if (id_item_selected == -1) {
+			jQuery('#kmod_targetid').show();
+		} else {
+			jQuery('#kmod_targetid').hide();
+		}
+	});
+	
+	jQuery('#kmod_categories').change(function() {
+		jQuery.getJSON(
+			kunena_url_ajax, { catid: jQuery(this).val() }
+		).done(function( json ) {
+			var first_item = jQuery('#kmod_topics option:nth(0)').clone();
+			var second_item = jQuery('#kmod_topics option:nth(1)').clone();      
+			
+			jQuery('#kmod_topics').empty();
+			first_item.appendTo('#kmod_topics');
+			second_item.appendTo('#kmod_topics');
+			
+			jQuery.each(json,function(index, object) {  
+				jQuery.each(object, function(key, element) {
+					jQuery('#kmod_topics').append('<option value="'+element['id']+'">'+element['subject']+'</option>');
+				});
+			});
+		});
+	});
+	
+	/* Button to show more info on profilebox */
+	jQuery(".heading").click(function() {
+            if ( !jQuery(this).hasClass('heading-less') ) {
+                    jQuery(this).prev(".heading").show();
+                    jQuery(this).hide();
+                    jQuery(this).next(".content").slideToggle(500);
+            } else {
+                    var content = jQuery(this).next(".heading").show();
+                    jQuery(this).hide();
+                    content.next(".content").slideToggle(500);
+            }
+    });
+	
+	/* To enabled emojis in kunena textera feature like on github */
+	if ( jQuery('#kemojis_allowed').val() ) {
+		jQuery('#kbbcode-message').atwho({
+			at: ":",
+			tpl:"<li data-value='${key}'>${name} <img src='${url}' height='20' width='20' /></li>",
+			callbacks: {
+				remote_filter: function(query, callback) {
+					if(query.length > 0) {
+						jQuery.ajax({
+							url: jQuery( "#kurl_emojis" ).val(),
+							data: {
+								search : query
+							},
+							success: function(data) {
+								callback(data.emojis);
+							}
+						});
+					}
+				}
+			}
+		});
+	}
 });
 
- 

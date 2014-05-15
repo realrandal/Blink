@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -10,23 +10,19 @@
  **/
 defined('_JEXEC') or die;
 
-$tabs = $this->getTabs();
+ 
 ?>
+
+	<?php if ($this->profile->isAuthorised('edit')) : ?>
+	<?php echo $this->profile->getLink(
+		'<i class="uk-icon-pencil"></i> ' . JText::_('COM_KUNENA_EDIT'),
+		JText::_('COM_KUNENA_EDIT_PROFILE'), 'nofollow', 'edit', 'uk-button uk-float-right'
+	); ?>
+	<?php endif; ?>
 
 <h2>
 	<?php echo JText::_('COM_KUNENA_USER_PROFILE'); ?>
 	<?php echo $this->escape($this->profile->getName()); ?>
-	<sup class="uk-badge label-<?php echo $this->profile->isOnline('success', 'important') ?>">
-		<?php echo $this->profile->isOnline(JText::_('COM_KUNENA_ONLINE'), JText::_('COM_KUNENA_OFFLINE')); ?>
-	</sup>
-
-	<?php if ($this->profile->isAuthorised('edit')) : ?>
-	<?php echo $this->profile->getLink(
-		'<i class="icon-arrow-right"></i> ' . JText::_('COM_KUNENA_EDIT'),
-		JText::_('COM_KUNENA_EDIT'), 'nofollow', 'edit', 'uk-button pull-right'
-	); ?>
-	<?php endif; ?>
-
 </h2>
 
 <?php
@@ -35,7 +31,10 @@ echo $this->subLayout('User/Item/Summary')
 	->set('config', $this->config);
 ?>
 
-<div class="tabs">
+<div class="tabs hidden-phone">
+ <br />
+<br />
+
 	<ul class="nav nav-tabs">
 
 		<?php foreach ($tabs as $name => $tab) : ?>

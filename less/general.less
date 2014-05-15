@@ -314,7 +314,7 @@ a:focus { outline: none;   }
 .forum-section:not(.minimized) .section-header { border-bottom-left-radius: 0; border-bottom-right-radius: 0;  }
 
 
-.section-description { margin: 0; background: #F9F9F9; border: 1px solid #ddd; padding: 20px; border-radius: 0 0 6px 6px  }
+.section-description { margin: 0; background: #F9F9F9; border: 1px solid #ddd; border-top: 0; padding: 20px; border-radius: 0 0 6px 6px  }
 
 .section-panel { border-top-left-radius: 0; border-top-right-radius: 0; border-top: 0;  padding: 0;  }
 
@@ -376,14 +376,18 @@ a:focus { outline: none;   }
 
 // WHO IS ONLINE --------------------------------------------
 
-.users-online { text-align: center; }
-.users-online > li { float: left; background: #fff; margin: 5px; padding-bottom: 5px; border-radius: 6px; border: 1px solid #ddd; }
+.users-online { text-align: center; font-size: 11px; }
+.users-online img { margin-bottom: 5px; }
 
- 
+.users-online > li { float: left; background: #fff; margin: 5px; padding-bottom: 5px;   border: 1px solid #ddd; }
+
+.hidden-users > li { background: none; }
  
 
 
 // SINGLE TOPIC VIEW ----------------------------------------
+
+.uk-breadcrumb.topic-categories { margin: 2px 5px 7px;  }
 
 .topic-title { font-weight: 300; }
 .message-box, .topic-title-bar, .user-info-box {  width: 88% }
@@ -445,6 +449,19 @@ width: 30px;
 
 // SINGLE TOPIC VIEW
 
+.topic-message-author { position: relative; }
+.mini-user-info .online-status {
+	position: absolute;
+	top: 52px;
+	padding: 0px 4px;
+	text-align: center;
+	background: #8CC14C;
+	font-size: 9px;
+	line-height: 14px;
+	color: #fff;
+	text-transform: uppercase;
+	left: 20px;
+}
 
 .hidden-info { height: 0; overflow: hidden; transition: height .5s ease-in-out; }
 
@@ -517,8 +534,9 @@ width: 30px;
 
 // QUICK REPLY ----------------------------------------------
  
- .quick-reply { background: #fff; border-top: 1px solid #ddd; padding: 20px;  }
- .quick-reply-heading { margin: 0; margin-bottom: 12px;  }
+.quick-reply { background: #fff; border-top: 1px solid #ddd; padding: 20px;  }
+.quick-reply-heading { margin: 0; margin-bottom: 12px;  }
+.quick-reply-textarea { height: 200px; } 
 
 
 // POLLS
@@ -762,3 +780,17 @@ width: 30px;
 	.last-reply-info { display: none} 
 	.topic-info { border: 0; }
 }
+
+
+// EDIT/NEW MESSAGE
+
+.kiconsel  { cursor: pointer;  } 
+
+
+// WYSIBB FIXES
+
+.wbb-list { line-height: 0; }
+
+.smile { width: auto;  max-width: auto; }
+.smile img { width: auto; max-width: 200%; }
+

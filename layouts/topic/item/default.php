@@ -16,6 +16,8 @@ var kunena_anonymous_name = "'.JText::_('COM_KUNENA_USERNAME_ANONYMOUS').'";
 
 $this->pagination->setDisplayedPages(4);
 
+$category = $this->topic->getCategory();
+
 ?>
 <?php if ($this->category->headerdesc) : ?>
 <div class="alert alert-info">
@@ -24,8 +26,16 @@ $this->pagination->setDisplayedPages(4);
 </div>
 <?php endif; ?>
 
-<div class="uk-margin uk-clearfix topic-actions">
+<ul class="uk-breadcrumb topic-categories"> 
+<li><a href="forum"><i class="uk-icon-comments-o uk-icon-small"></i></a></li>
+ 	<?php if ($category->parent_id) : ?>
+	<li><?php echo $this->getCategoryLink($category->getParent(), $this->escape($category->getParent()->name)); ?></li>
+	<?php endif; ?>
+	<li><?php echo $this->getCategoryLink($category, $this->escape($category->name)); ?></li>
+</ul>
 
+<div class="uk-margin uk-clearfix topic-actions">
+	
 	<div class="uk-float-right">
 		<?php echo $this->subLayout('Pagination/List')->set('pagination', $this->pagination); ?>
 	</div>

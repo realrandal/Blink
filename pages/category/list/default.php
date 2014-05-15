@@ -20,6 +20,6 @@ $this->addBreadcrumb(
 echo $content; ?>
 
 <div class="uk-grid">
-<div class="uk-width-medium-1-2"><?php echo $this->subRequest('Statistics/WhoIsOnline'); ?></div>
-<div class="uk-width-medium-1-2"><?php echo $this->subRequest('Page/Statistics'); ?></div>
+<div class="uk-width-medium-6-10"><?php echo $this->subRequest('Statistics/WhoIsOnline'); ?></div>
+<div class="uk-width-medium-4-10"><?php echo $this->subRequest('Page/Statistics'); ?></div>
 </div>

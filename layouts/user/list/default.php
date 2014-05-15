@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -10,19 +10,6 @@
  **/
 defined('_JEXEC') or die;
 
-if ($this->me->exists()) {
-	// FIXME: autocompleter isn't working, breaks mootools..
-	/*$this->addScriptDeclaration(
-"// <![CDATA[
-document.addEvent('domready', function() {
-	// Attach auto completer to the following ids:
-	new Autocompleter.Request.JSON('kusersearch', '"
-	. KunenaRoute::_('index.php?option=com_kunena&view=user&layout=list&format=raw')
-	. "', { 'postVar': 'search' });
-});
-// ]]>"
-	);*/
-}
 $cols = 1;
 ?>
 <h2>
@@ -31,6 +18,9 @@ $cols = 1;
 	<form action="<?php echo KunenaRoute::_('index.php?option=com_kunena&view=user&layout=list'); ?>" method="post"
 	      name="usrlform" id="usrlform" class="form-search pull-right">
 		<input type="hidden" name="view" value="user" />
+		<?php if ($this->me->exists()): ?>
+			<input type="hidden" id="kurl_users" name="kurl_users" value="<?php echo KunenaRoute::_('index.php?option=com_kunena&view=user&layout=listmention&format=raw') ?>" />
+		<?php endif; ?>
 		<?php echo JHtml::_('form.token'); ?>
 
 		<div class="input-append">
@@ -39,7 +29,7 @@ $cols = 1;
 				       value="<?php echo $this->escape($this->state->get('list.search')); ?>" placeholder="" />
 			</label>
 
-			<button type="submit" class="uk-button"><?php echo JText::_('COM_KUNENA_USRL_SEARCH'); ?></button>
+			<button type="submit" class="btn"><span class="icon icon-search"></span></button>
 		</div>
 	</form>
 </h2>
@@ -148,7 +138,7 @@ $cols = 1;
 
 				<?php if ($this->config->userlist_online) : ?>
 				<td class="center">
-					<span class="uk-badge label-<?php echo $user->isOnline('success', 'important'); ?>">
+					<span class="label label-<?php echo $user->isOnline('success', 'important'); ?>">
 						<?php echo $user->isOnline(JText::_('COM_KUNENA_ONLINE'), JText::_('COM_KUNENA_OFFLINE')); ?>
 					</span>
 				</td>
@@ -204,15 +194,17 @@ $cols = 1;
 			<?php endforeach; ?>
 
 		</tbody>
+		<?php if ($i > 1) : ?>
 		<tfoot>
 			<tr>
 				<td colspan="<?php echo $cols; ?>">
-					<div class="uk-float-right">
-						<?php echo $this->subLayout('Pagination/List')->set('pagination', $this->pagination); ?>
+					<div class="pull-right">
+						<?php echo $this->subLayout('Widget/Pagination/List')->set('pagination', $this->pagination); ?>
 					</div>
 				</td>
 			</tr>
 		</tfoot>
+		<?php endif; ?>
 	</table>
 </form>
-
+<div class="clearfix"></div>

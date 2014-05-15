@@ -15,7 +15,7 @@ $signature = $this->profile->getSignature();
 $attachments = $this->message->getAttachments();
 ?>
 
-<div id="<?php echo $this->message->id ?>" class="topic-<?php echo (!$isReply) ? 'start' : 'reply'; ?> uk-clearfix">
+<div id="<?php echo $this->message->id ?>" class="user-<?php echo $this->profile->id ?> topic-<?php echo (!$isReply) ? 'start' : 'reply'; ?> uk-clearfix">
 
 	<div class="uk-float-right uk-text-muted uk-text-small message-date">
 	
@@ -26,7 +26,7 @@ $attachments = $this->message->getAttachments();
 	</div>
 
 
-	<?php if ($this->topic->subject != $message->subject) : ?>
+	<?php // if ($this->topic->subject != $message->subject) : ?>
 
 		<?php if ($isReply) : ?>
 			<h3 class="message-title uk-hidden uk-clearfix">
@@ -34,7 +34,7 @@ $attachments = $this->message->getAttachments();
 					<?php echo $this->message->displayField('subject'); ?>
 				<?php endif; ?>
 			</h3>
-		<?php endif; ?>
+		<?php // endif; ?>
 
 	<?php endif; ?>
 	

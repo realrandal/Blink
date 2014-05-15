@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -10,69 +10,68 @@
  **/
 defined('_JEXEC') or die;
 ?>
-<h2>
-	<?php echo JText::_('COM_KUNENA_USER_PROFILE'); ?> <?php echo $this->escape($this->profile->getName()); ?>
 
 	<?php echo $this->profile->getLink(
-		'<i class="icon-arrow-left"></i> ' . JText::_('COM_KUNENA_BACK'),
-		JText::_('COM_KUNENA_BACK'), 'nofollow', '', 'uk-button pull-right'
+		'<i class="uk-icon-arrow-left"></i> ' . JText::_('COM_KUNENA_BACK'),
+		JText::_('COM_KUNENA_BACK'), 'nofollow', '', 'uk-button uk-float-right'
 	); ?>
+
+<h2>
+	<?php echo JText::_('COM_KUNENA_USER_PROFILE'); ?> <?php echo $this->escape($this->profile->getName()); ?>
 </h2>
 
-<form action="<?php echo KunenaRoute::_('index.php?option=com_kunena&view=user'); ?>" method="post" enctype="multipart/form-data" name="kuserform" class="form-validate" id="kuserform">
+<form action="<?php echo KunenaRoute::_('index.php?option=com_kunena&view=user'); ?>" method="post" enctype="multipart/form-data" name="kuserform" class="form-validate uk-form" id="kuserform">
 	<input type="hidden" name="task" value="save" />
 	<input type="hidden" name="userid" value="<?php echo (int) $this->user->id; ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 
-	<div class="tabs">
-		<ul id="KunenaUserEdit" class="nav nav-tabs">
-			<li class="active">
-				<a href="#home" data-toggle="tab">
+
+	<div class="blink-tabs">
+		<ul class="uk-tab" data-uk-tab="{connect:'#KunenaUserEdit'}">
+			<li class="uk-active">
+				<a href="#home">
 					<?php echo JText::_('COM_KUNENA_PROFILE_EDIT_USER'); ?>
 				</a>
 			</li>
 			<li>
-				<a href="#editprofile" data-toggle="tab">
+				<a href="#editprofile">
 					<?php echo JText::_('COM_KUNENA_PROFILE_EDIT_PROFILE'); ?>
 				</a>
 			</li>
-			<li>
-				<a href="#editavatar" data-toggle="tab">
+<!-- 			<li>
+				<a href="#editavatar">
 					<?php echo JText::_('COM_KUNENA_PROFILE_EDIT_AVATAR'); ?>
 				</a>
-			</li>
+			</li> -->
 			<li>
-				<a href="#editsettings" data-toggle="tab">
+				<a href="#editsettings">
 					<?php echo JText::_('COM_KUNENA_PROFILE_EDIT_SETTINGS'); ?>
 				</a>
 			</li>
 		</ul>
 
-		<div id="KunenaUserEdit" class="tab-content">
-			<div class="tab-pane fade in active" id="home">
+		<ul id="KunenaUserEdit" class="uk-switcher uk-margin">
+			<li class="" id="home">
 				<?php echo $this->subRequest('User/Edit/User'); ?>
-			</div>
-			<div class="tab-pane fade" id="editprofile">
+			</li>
+			<li class="" id="editprofile">
 				<?php echo $this->subRequest('User/Edit/Profile'); ?>
-			</div>
-			<div class="tab-pane fade" id="editavatar">
-				<?php echo $this->subRequest('User/Edit/Avatar'); ?>
-			</div>
-			<div class="tab-pane fade" id="editsettings">
+			</li>
+			<!-- 		DISABLED TMP TODO	
+			<li class="" id="editavatar">
+				<?php // echo $this->subRequest('User/Edit/Avatar'); ?>
+			</li> -->
+			<li class="" id="editsettings">
 				<?php echo $this->subRequest('User/Edit/Settings'); ?>
-			</div>
+			</li>
+		</ul>
+	</div>
 
-			<br />
-
-			<div class="center">
-				<button class="uk-button btn-primary validate" type="submit">
+					<button class="uk-button uk-button-primary " type="submit">
 					<?php echo JText::_('COM_KUNENA_SAVE'); ?>
 				</button>
 				<input type="button" name="cancel" class="uk-button"
 				       value="<?php echo (' ' . JText::_('COM_KUNENA_CANCEL') . ' '); ?>"
 				       onclick="window.history.back();"
 				       title="<?php echo (JText::_('COM_KUNENA_EDITOR_HELPLINE_CANCEL')); ?>" />
-			</div>
-		</div>
-	</div>
 </form>

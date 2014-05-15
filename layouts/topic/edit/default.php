@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package Kunena.Template.Blink
+ * @package Kunena.Template.Crypsis
  * @subpackage Topic
  *
  * @copyright (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -10,7 +10,6 @@
  **/
 defined ( '_JEXEC' ) or die ();
 
-JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 
@@ -46,8 +45,8 @@ $this->addScriptDeclaration("window.addEvent('domready', function() {
 $this->k=0;
 ?>
 
-<form action="<?php echo KunenaRoute::_('index.php?option=com_kunena') ?>" method="post" class="form-horizontal"
-      id="postform" name="postform" enctype="multipart/form-data" onsubmit="return myValidate(this);">
+<form action="<?php echo KunenaRoute::_('index.php?option=com_kunena') ?>" method="post" class="uk-form uk-form-horizontal"
+      id="postform" name="postform" enctype="multipart/form-data">
 	<input type="hidden" name="view" value="topic" />
 	<input id="kcategory_poll" type="hidden" name="kcategory_poll" value="<?php echo $this->message->catid; ?>" />
 	<input id="kpreview_url" type="hidden" name="kpreview_url" value="<?php echo KunenaRoute::_('index.php?option=com_kunena&view=topic&layout=edit&format=raw', false) ?>" />
@@ -66,77 +65,74 @@ $this->k=0;
 	<?php endif; ?>
 	<?php echo JHtml::_( 'form.token' ); ?>
 
-	<h2>
+	<h2 class="uk-margin-top-remove">
 		<?php echo $this->escape($this->headerText)?>
 	</h2>
 
-	<div class="well">
-		<div class="row-fluid column-row">
-			<div class="span12 column-item" >
-				<fieldset class="pull-left">
+	<div>
+ 
+	 
+				<fieldset>
 					<?php if (isset($this->selectcatlist)): ?>
-					<div class="control-group">
+					<div class="uk-form-row">
 						<!-- Username -->
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_CATEGORY')?></label>
-						<div class="controls"> <?php echo $this->selectcatlist?> </div>
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_CATEGORY')?></label>
+						<div class="uk-form-controls"> <?php echo $this->selectcatlist?> </div>
 					</div>
 					<?php endif; ?>
 					<?php if ($this->message->userid) : ?>
-					<div class="control-group" id="kanynomous-check" <?php if (!$this->category->allow_anonymous): ?>style="display:none;"<?php endif; ?>>
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_POST_AS_ANONYMOUS'); ?></label>
-						<div class="controls">
+					<div class="uk-form-row" id="kanynomous-check" <?php if (!$this->category->allow_anonymous): ?>style="display:none;"<?php endif; ?>>
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_POST_AS_ANONYMOUS'); ?></label>
+						<div class="uk-form-controls">
 							<input type="checkbox" id="kanonymous" name="anonymous" value="1" <?php if ($this->post_anonymous) echo 'checked="checked"'; ?> />
 							<label for="kanonymous"><?php echo JText::_('COM_KUNENA_POST_AS_ANONYMOUS_DESC'); ?></label>
 						</div>
 					</div>
 					<?php endif; ?>
-					<div class="control-group" id="kanynomous-check-name"
+					<div class="uk-form-row" id="kanynomous-check-name"
 						<?php if ( $this->me->userid && !$this->category->allow_anonymous ): ?>style="display:none;"<?php endif; ?>>
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_GEN_NAME'); ?></label>
-						<div class="controls">
-							<input type="text" id="kauthorname" name="authorname" size="35" class="input-xxlarge required" maxlength="35" value="<?php echo $this->escape($this->message->name);?>" />
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_GEN_NAME'); ?></label>
+						<div class="uk-form-controls">
+							<input type="text" id="kauthorname" name="authorname" size="35" placeholder="<?php echo JText::_('COM_KUNENA_TOPIC_EDIT_PLACEHOLDER_AUTHORNAME') ?>" class="uk-form-width-large" maxlength="35" value="<?php echo $this->escape($this->message->name);?>" required />
 						</div>
 					</div>
 					<?php if ($this->config->askemail && !$this->me->userid) : ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_GEN_EMAIL');?></label>
-						<div class="controls">
-							<input type="text" id="email" name="email"	size="35" class="input-xxlarge required validate-email" maxlength="35" value="<?php echo !empty($this->message->email) ? $this->escape($this->message->email) : '' ?>" />
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_GEN_EMAIL');?></label>
+						<div class="uk-form-controls">
+							<input type="text" id="email" name="email"	size="35" placeholder="<?php echo JText::_('COM_KUNENA_TOPIC_EDIT_PLACEHOLDER_EMAIL') ?>" class="uk-form-width-large" maxlength="35" value="<?php echo !empty($this->message->email) ? $this->escape($this->message->email) : '' ?>" required />
 							<br />
 							<?php echo $this->config->showemail == '0' ? JText::_('COM_KUNENA_POST_EMAIL_NEVER') : JText::_('COM_KUNENA_POST_EMAIL_REGISTERED'); ?> </div>
 					</div>
 					<?php endif; ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_GEN_SUBJECT'); ?></label>
-						<div class="controls">
-							<input class="input-xxlarge required" type="text" placeholder="Subject" name="subject" id="subject" maxlength="<?php echo $this->escape($this->config->maxsubject); ?>" value="<?php echo $this->escape($this->message->subject); ?>" tabindex="1" />
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_GEN_SUBJECT'); ?></label>
+						<div class="uk-form-controls">
+							<input class="uk-form-width-large" type="text" placeholder="<?php echo JText::_('COM_KUNENA_TOPIC_EDIT_PLACEHOLDER_SUBJECT') ?>" name="subject" id="subject" maxlength="<?php echo $this->escape($this->config->maxsubject); ?>" value="<?php echo $this->escape($this->message->subject); ?>" tabindex="1" required />
 						</div>
 					</div>
 					<?php if (!empty($this->topicIcons)) : ?>
-						<div class="control-group">
-							<label class="control-label"><?php echo JText::_('COM_KUNENA_GEN_TOPIC_ICON'); ?></label>
-							<div class="controls">
-								<?php foreach ($this->topicIcons as $id=>$icon): ?>
-									<span class="kiconsel">
-										<label for="radio<?php echo $icon->id ?>">
-										<input type="radio" id="radio<?php echo $icon->id ?>" name="topic_emoticon" value="<?php echo $icon->id ?>" <?php echo !empty($icon->checked) ? ' checked="checked" ':'' ?> />
-										<img src="<?php echo $this->template->getTopicIconIndexPath($icon->id, true);?>" alt="" border="0" /> 
-										</label>
-									</span>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						<?php endif; ?>
+          <div class="uk-form-row">
+          	<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_GEN_TOPIC_ICON'); ?></label>
+          	<div class="uk-form-controls">
+          		<?php foreach ($this->topicIcons as $id=>$icon): ?>
+            	<span class="kiconsel">
+              <input type="radio" id="radio<?php echo $icon->id ?>" name="topic_emoticon" value="<?php echo $icon->id ?>" <?php echo !empty($icon->checked) ? ' checked="checked" ':'' ?> />
+              <label for="radio<?php echo $icon->id ?>"><img src="<?php echo $this->template->getTopicIconIndexPath($icon->id, true);?>" alt="" border="0" /> </label></span>
+              <?php endforeach; ?>
+             </div>
+          </div>
+          <?php endif; ?>
 					<?php
 					// Show bbcode editor
 					echo $this->subLayout('Topic/Edit/Editor')->setProperties($this->getProperties());
 					?>
 					<?php if ($this->allowedExtensions) : ?>
-					<div class="control-group krow<?php echo 1 + $this->k^=1;?>" id="kpost-attachments">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_EDITOR_ATTACHMENTS'); ?></label>
-						<div class="controls">
+					<div class="uk-form-row" id="kpost-attachments">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_EDITOR_ATTACHMENTS'); ?></label>
+						<div class="uk-form-controls">
 							<div id="kattachment-id" class="kattachment"> <span class="kattachment-id-container"></span>
-								<input class="kfile-input-textbox" type="text" readonly="readonly" />
+								<input class="kfile-input-textbox" type="text" readonly />
 								<div class="kfile-hide hasTip" title="<?php echo JText::_('COM_KUNENA_FILE_EXTENSIONS_ALLOWED')?>::<?php echo $this->escape(implode(', ', $this->allowedExtensions)) ?>" >
 									<input type="button" value="<?php echo	JText::_('COM_KUNENA_EDITOR_ADD_FILE'); ?>" class="kfile-input-button btn" />
 									<input id="kupload" class="kfile-input" name="kattachment" type="file" />
@@ -151,42 +147,42 @@ $this->k=0;
 					</div>
 					<?php endif; ?>
 					<?php if ($this->config->keywords && $this->me->isModerator ( $this->topic->getCategory() ) ) : ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_EDITOR_TOPIC_TAGS') ?></label>
-						<div class="controls">
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_EDITOR_TOPIC_TAGS') ?></label>
+						<div class="uk-form-controls">
 							<input type="text" class="kinputbox postinput" name="tags" id="tags" size="35" maxlength="100" value="<?php echo $this->escape($this->topic->getKeywords(false, ', ')); ?>" />
 						</div>
 					</div>
 					<?php endif; ?>
 					<?php if ($this->config->userkeywords && $this->me->userid) : ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_EDITOR_TOPIC_TAGS_OWN') ?></label>
-						<div class="controls">
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_EDITOR_TOPIC_TAGS_OWN') ?></label>
+						<div class="uk-form-controls">
 							<input type="text" class="kinputbox postinput" name="mytags" id="mytags" size="35" maxlength="100" value="<?php echo $this->escape($this->topic->getKeywords($this->me->userid, ', ')); ?>" />
 						</div>
 					</div>
 					<?php endif; ?>
 					<?php if ($this->canSubscribe) : ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_POST_SUBSCRIBE'); ?></label>
-						<div class="controls">
-							<input style="float: left; margin-right: 10px;" type="checkbox" name="subscribeMe" id="subscribeMe" value="1" <?php if ($this->subscriptionschecked == 1) echo 'checked="checked"' ?> />
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_POST_SUBSCRIBE'); ?></label>
+						<div class="uk-form-controls">
+							<input type="checkbox" name="subscribeMe" id="subscribeMe" value="1" <?php if ($this->subscriptionschecked == 1) echo 'checked="checked"' ?> />
 							<label class="string optional" for="subscribeMe"><?php echo JText::_('COM_KUNENA_POST_NOTIFIED'); ?></label>
 						</div>
 					</div>
 					<?php endif; ?>
 					<?php if (!empty($this->captchaHtml)) : ?>
-					<div class="control-group">
-						<label class="control-label"><?php echo JText::_('COM_KUNENA_CAPDESC'); ?></label>
-						<div class="controls"> <?php echo $this->captchaHtml ?> </div>
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('COM_KUNENA_CAPDESC'); ?></label>
+						<div class="uk-form-controls"> <?php echo $this->captchaHtml ?> </div>
 					</div>
 					<?php endif; ?>
-					<div class="center">
-						<input type="submit" name="ksubmit" class="uk-button btn-primary"
+					<div class="uk-text-center uk-margin">
+						<input type="submit" name="ksubmit" class="uk-button uk-button-success uk-button-large"
 						value="<?php echo (' ' . JText::_('COM_KUNENA_SUBMIT') . ' ');?>"
 						title="<?php echo (JText::_('COM_KUNENA_EDITOR_HELPLINE_SUBMIT'));?>" tabindex="4" />
 						<input type="button" name="preview" class="uk-button"
-						onclick="kToggleOrSwapPreview('kbbcode-preview-bottom')"
+						onclick="kToggleOrSwapPreview('kbbcode-preview-bottom controls')"
 						value="<?php echo (' ' . JText::_('COM_KUNENA_PREVIEW') . ' ');?>"
 						title="<?php echo (JText::_('COM_KUNENA_EDITOR_HELPLINE_PREVIEW'));?>:: "tabindex="3" />
 						<input type="button" name="cancel" class="uk-button"
@@ -195,9 +191,8 @@ $this->k=0;
 						title="<?php echo (JText::_('COM_KUNENA_EDITOR_HELPLINE_CANCEL'));?>" tabindex="5" />
 					</div>
 				</fieldset>
-			</div>
-		</div>
-	</div>
+		 
+	 
 	<?php
 if (!$this->message->name) {
 	echo '<script type="text/javascript">document.postform.authorname.focus();</script>';

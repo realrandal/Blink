@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package Kunena.Template.Blink
+ * @package Kunena.Template.Crypsis
  * @subpackage Topic
  *
  * @copyright (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -12,9 +12,7 @@ defined ( '_JEXEC' ) or die ();
 
 $k = 0;
 ?>
-<div class="uk-float-right">
-	<div class="uk-button btn-small" data-toggle="collapse" data-target="#history">X</div>
-</div>
+ 
 <h2>
 	<?php echo JText::_('COM_KUNENA_POST_TOPIC_HISTORY' )?>:
 	<?php echo $this->escape($this->topic->subject) ?>
@@ -42,8 +40,8 @@ $k = 0;
 			</div>
 		</div>
 		<div class="span10">
-			<div class="uk-panel-box">
-				<div class="uk-float-right">
+			<div class="well well-small">
+				<div class="pull-right">
 					<?php echo $this->getNumLink($this->message->id,$this->replycount--) ?>
 				</div>
 				<div>
@@ -65,8 +63,8 @@ $k = 0;
 							<?php foreach($attachments as $attachment) : ?>
 								<li class="span4">
 									<div class="thumbnail">
-										<?php echo $attachment->getThumbnailLink(); ?>
-										<?php echo $attachment->getTextLink(); ?>
+										<?php echo $attachment->getLayout()->render('thumbnail'); ?>
+										<?php echo $attachment->getLayout()->render('textlink'); ?>
 									</div>
 								</li>
 							<?php endforeach; ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Kunena Component
- * @package     Kunena.Template.Blink
+ * @package     Kunena.Template.Crypsis
  * @subpackage  Layout.User
  *
  * @copyright   (C) 2008 - 2014 Kunena Team. All rights reserved.
@@ -10,7 +10,7 @@
  **/
 defined('_JEXEC') or die;
 
-/** @var array|KunenaForumMessageAttachment[] $attachments */
+/** @var array|KunenaAttachment[] $attachments */
 $attachments = $this->attachments;
 ?>
 <h3>
@@ -57,9 +57,13 @@ $attachments = $this->attachments;
 		</thead>
 		<tbody>
 			<?php
-				if (!$attachments) :
-					echo JText::_('COM_KUNENA_USER_NO_ATTACHMENTS');
-				else :
+				if (!$attachments) : ?>
+					<tr>
+						<td colspan="8">
+							<?php echo JText::_('COM_KUNENA_USER_NO_ATTACHMENTS'); ?>
+						</td>
+					</tr>
+				<?php else :
 					$i=0;
 					foreach ($attachments as $attachment) :
 						$message = $attachment->getMessage();
@@ -68,7 +72,7 @@ $attachments = $this->attachments;
 			<tr>
 				<td><?php echo ++$i; ?></td>
 				<td>
-					<?php if ($canDelete) echo JHtml::_('grid.id', $i-1, intval($attachment->id)); ?>
+					<?php if ($canDelete) echo JHtml::_('grid.id', $i, intval($attachment->id)); ?>
 				</td>
 				<td class="center">
 					<img src="<?php echo $attachment->isImage()
@@ -76,7 +80,7 @@ $attachments = $this->attachments;
 						: JUri::root(true).'/media/kunena/icons/file.png'; ?>" alt="" title="" />
 				</td>
 				<td>
-					<?php echo $attachment->getFilename(); ?>
+					<?php echo $attachment->getShortName(5, 5); ?>
 				</td>
 				<td>
 					<?php echo number_format(intval($attachment->size) / 1024, 0, '', ',') . ' ' . JText::_('COM_KUNENA_USER_ATTACHMENT_FILE_WEIGHT'); ?>
@@ -85,7 +89,7 @@ $attachments = $this->attachments;
 					<?php echo $this->getTopicLink($message->getTopic(), $message); ?>
 				</td>
 				<td class="center">
-					<?php echo $attachment->getThumbnailLink() ; ?>
+					<?php echo $attachment->getLayout()->render('thumbnail') ; ?>
 				</td>
 				<td class="center">
 
@@ -104,5 +108,5 @@ $attachments = $this->attachments;
 		</tbody>
 	</table>
 
-	<input class="uk-button pull-right" type="submit" value="<?php echo JText::_('COM_KUNENA_FILES_DELETE'); ?>" />
+	<input class="btn pull-right" type="submit" value="<?php echo JText::_('COM_KUNENA_FILES_DELETE'); ?>" />
 </form>
